@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import FormContainer from './containers/FormContainer';
+import ChocolateBarCustomizer from './containers/ChocolateBarCustomizer/ChocolateBarCustomizer';
 import './App.scss';
 
 function App() {
@@ -8,6 +9,8 @@ function App() {
     <div>
       <Navbar />
       <FormContainer />
+      {/* <ChocolateBarCustomizer /> */}
+
     </div>
   );
 }
