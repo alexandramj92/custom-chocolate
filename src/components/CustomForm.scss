@@ -1,0 +1,54 @@
+.custom-form {
+  margin: 2rem 2rem;
+  padding: 2rem 0rem;
+}
+
+form {
+  max-width: 90%;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+
+  .form-logo-option {
+    width: 100%;
+  }
+
+  h4 {
+    display: block;
+    order: 1;
+    min-width: 100%;
+  }
+
+  .form-check-option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem 2rem;
+    order: 2;
+  }
+
+  input {
+    display: flex;
+  }
+
+  .form-logo-img {
+    max-height: 2rem;
+    margin: 0.5rem 0.75rem;
+    display: flex;
+  }
+
+  .form-art-selection {
+    min-width: 16rem;
+    margin: 2rem 2rem;
+    padding: 0.75rem;
+
+    .form-art.option {
+      padding: 1rem 2rem;
+    }
+  }
+
+  .form-message-option {
+    width: 100%;
+  }
+}
