@@ -12,11 +12,8 @@ const previewLogo = props => {
 
         return (
 
-            // <div>This is a test!</div>
-            // <DraggableDiv previewLogoInDiv = {props.previewLogo}> </DraggableDiv>
-            <DraggableDiv> <img src={props.previewLogo}/> </DraggableDiv>
-
-           
+            
+            <DraggableDiv> <img style={{ height: '50px' }} src={props.previewLogo}/> </DraggableDiv>
     
         );
 

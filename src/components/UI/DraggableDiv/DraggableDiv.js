@@ -4,7 +4,11 @@ import './DraggableDiv.scss';
 
 class DraggableDiv extends React.Component {
    render(){
+      const dragHandlers = {onStart: this.onStart, onStop: this.onStop};
+
       return(
+         
+ 
          <Draggable
          handle=".drag"
          defaultPosition={{x: 0, y: 0}}
@@ -14,11 +18,13 @@ class DraggableDiv extends React.Component {
          onStart={this.handleStart}
          onDrag={this.handleDrag}
          onStop={this.handleStop}
+         bounds= "parent"
+         {...dragHandlers}
          >
-         {/* <div className="drag"><img src={this.props.previewLogoInDiv} /></div> */}
          <div className="drag">{this.props.children}</div>
 
          </ Draggable>
+
       )
    }
 }
