@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import ImageUpload from '../ImageUpload/ImageUpload';
 import MarchLogo from '../../assets/logos/march_logo.png';
 import SorbetLogo from '../../assets/logos/sorbet_logo.png';
 import Button from '../UI/Button/Button';
 import ColorPalette from '../ColorPalette/ColorPalette';
 import './CustomForm.scss';
 
-const CustomForm = () => {
+const CustomForm = (props) => {
   const [formData, setFormData] = useState({
     logo: '',
     artFileName: '',
@@ -69,6 +70,7 @@ const CustomForm = () => {
         </div>
         <div className="form-wrapper-art-option">
           <h4>Wrapper Art</h4>
+          <ImageUpload content={props.content} />
           <div className="form-art-templates">
             <select
               className="form-art-selection"
