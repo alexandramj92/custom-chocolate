@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PreviewBox from '../PreviewBox/PreviewBox';
-import FormContainer from '../FormContainer';
+import FormContainer from '../FormContainer/FormContainer';
 
 import './ChocolateBarCustomizer.scss';
 
@@ -14,89 +14,78 @@ import Images from '../../components/Images/Images';
 import ImageUploadButton from '../../components/UI/ImageUploadButton/ImageUploadButton';
 import { API_URL } from '../../config';
 
-
-
-
 const ChocolateBarCustomizer = () => {
+  const [logoSelection, setLogoSelection] = useState(Logo1);
+  const [message, setMessage] = useState(
+    'Happy Birtday Jessica! Hope you have a wonderful day.'
+  );
+  const [messageFontSize, setMessageFontSize] = useState('30px');
+  const [messageColor, setMessageColor] = useState('#0C527D');
+  const [wrapperDesign, setWrapperDesign] = useState(testImage);
+  const [uploading, setUploading] = useState(false);
+  const [images, setImages] = useState([]);
 
-const [logoSelection, setLogoSelection] = useState(Logo1);
-const [message, setMessage] = useState('Happy Birtday Jessica! Hope you have a wonderful day.');
-const [messageFontSize, setMessageFontSize] = useState('30px');
-const [messageColor, setMessageColor] = useState('#0C527D');
-const [wrapperDesign, setWrapperDesign] = useState(testImage);
-const [uploading, setUploading] = useState(false);
-const [images, setImages] = useState([]);
-
-
-const onChange = e => {
-    const files = Array.from(e.target.files)
+  const onChange = (e) => {
+    const files = Array.from(e.target.files);
     // this.setState({ uploading: true })
     setUploading(true);
 
-    const formData = new FormData()
+    const formData = new FormData();
 
     files.forEach((file, i) => {
-      formData.append(i, file)
-    })
+      formData.append(i, file);
+    });
 
     fetch(`${API_URL}/image-upload`, {
       method: 'POST',
-      body: formData
+      body: formData,
     })
-    // .then(res => console.log(res))
-    .then(res => res.json())
-    .then(images => {
-      setUploading(false);
-      setImages(images);
-    })
-  }
+      // .then(res => console.log(res))
+      .then((res) => res.json())
+      .then((images) => {
+        setUploading(false);
+        setImages(images);
+      });
+  };
 
-const removeImage = id => {
-    setImages(images.filter(image => image.public_id !== id)
-    )
-  }
+  const removeImage = (id) => {
+    setImages(images.filter((image) => image.public_id !== id));
+  };
 
   const content = () => {
-    switch(true) {
+    switch (true) {
       case uploading:
-        return <Spinner />
-    //   case images.length > 0:
-    //     return <Images images={images} removeImage={removeImage} />
+        return <Spinner />;
+      //   case images.length > 0:
+      //     return <Images images={images} removeImage={removeImage} />
       default:
-        return <ImageUploadButton onChange={onChange} />
+        return <ImageUploadButton onChange={onChange} />;
     }
-  }
+  };
 
-//   console.log(images.map((image, i) => console.log(image.secure_url)))
+  //   console.log(images.map((image, i) => console.log(image.secure_url)))
 
+  return (
+    <div className="chocolatebarcustomizer">
+      {/* <ImageUpload content={content()} /> */}
 
-return (
-
-    <div className='chocolatebarcustomizer'>
-        {/* <ImageUpload content={content()} /> */}
-          
-        <div className='grid-container'>
-        <div className='grid-item'>
-        <FormContainer content={content()}/>
+      <div className="grid-container">
+        <div className="grid-item">
+          <FormContainer content={content()} />
         </div>
-        <div className='grid-item'>
-        <PreviewBox 
-        logoSelected={logoSelection} 
-        images={images}
-        messageSelected={message} 
-        messageColorSelected={messageColor}
-        messageFontSizeSelected={messageFontSize}
-        wrapperDesignSelected = {wrapperDesign}
-         />
-         </div>
-
-         </div>
+        <div className="grid-item">
+          <PreviewBox
+            logoSelected={logoSelection}
+            images={images}
+            messageSelected={message}
+            messageColorSelected={messageColor}
+            messageFontSizeSelected={messageFontSize}
+            wrapperDesignSelected={wrapperDesign}
+          />
+        </div>
+      </div>
     </div>
-)
-
-
-
-}
+  );
+};
 
 export default ChocolateBarCustomizer;
-
