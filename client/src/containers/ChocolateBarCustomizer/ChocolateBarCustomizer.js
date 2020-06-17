@@ -11,7 +11,7 @@ import ImageUpload from '../../components/ImageUpload/ImageUpload';
 
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Images from '../../components/Images/Images';
-import Button from '../../components/UI/Button/Button';
+import ImageUploadButton from '../../components/UI/ImageUploadButton/ImageUploadButton';
 import { API_URL } from '../../config';
 
 
@@ -63,7 +63,7 @@ const removeImage = id => {
     //   case images.length > 0:
     //     return <Images images={images} removeImage={removeImage} />
       default:
-        return <Button onChange={onChange} />
+        return <ImageUploadButton onChange={onChange} />
     }
   }
 
