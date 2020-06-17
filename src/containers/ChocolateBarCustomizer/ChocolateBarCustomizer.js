@@ -23,7 +23,11 @@ const [wrapperDesign, setWrapperDesign] = useState(testImage);
 return (
 
     <div className='chocolatebarcustomizer'>
+        <div className='grid-container'>
+        <div className='grid-item'>
         <FormContainer/>
+        </div>
+        <div className='grid-item'>
         <PreviewBox 
         logoSelected={logoSelection} 
         messageSelected={message} 
@@ -31,6 +35,9 @@ return (
         messageFontSizeSelected={messageFontSize}
         wrapperDesignSelected = {wrapperDesign}
          />
+         </div>
+
+         </div>
     </div>
 )
 
