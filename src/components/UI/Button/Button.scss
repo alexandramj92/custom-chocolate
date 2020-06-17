@@ -1,0 +1,19 @@
+button {
+  border-radius: 10px;
+  border: none;
+  padding: 0.75rem 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2.25px;
+  min-width: 158px;
+  margin: 1rem;
+  cursor: pointer;
+}
+
+.primary {
+  background: #f09958;
+  color: #fafafa;
+}
+
+.secondary {
+  background: #c6c5c5;
+}

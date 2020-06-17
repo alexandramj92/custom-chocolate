@@ -40,15 +40,48 @@ form {
 
   .form-art-selection {
     min-width: 16rem;
-    margin: 2rem 2rem;
-    padding: 0.75rem;
+    border: 0.5px solid #c9c9c9;
+    padding: 0.5rem 0.5rem;
+    margin-top: 0.35rem;
 
     .form-art.option {
-      padding: 1rem 2rem;
+      padding: 0.5rem 0.5rem;
     }
   }
 
   .form-message-option {
     width: 100%;
+
+    h4 {
+      margin-top: 1rem;
+    }
+
+    p {
+      font-weight: normal;
+      margin: 0.25rem 0rem;
+    }
   }
+
+  .form-text-font-selection {
+    padding: 0.5rem 0.5rem;
+    border: 0.5px solid #c9c9c9;
+    margin-right: 0.5rem;
+  }
+
+  .form-text-size-selection {
+    border: 0.5px solid #c9c9c9;
+    padding: 0.5rem 0.5rem;
+  }
+
+  textarea {
+    width: 300px;
+    height: 100px;
+    border: 0.5px solid #c9c9c9;
+    padding: 0.25rem;
+  }
+}
+
+.buttons {
+  display: inline;
+  margin: 1rem 2rem;
 }

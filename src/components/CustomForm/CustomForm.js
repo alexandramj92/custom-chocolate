@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import MarchLogo from '../assets/logos/march_logo.png';
-import SorbetLogo from '../assets/logos/sorbet_logo.png';
+import MarchLogo from '../../assets/logos/march_logo.png';
+import SorbetLogo from '../../assets/logos/sorbet_logo.png';
+import Button from '../UI/Button/Button';
+import ColorPalette from '../ColorPalette/ColorPalette';
 import './CustomForm.scss';
 
 const CustomForm = () => {
@@ -16,11 +18,25 @@ const CustomForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
-    console.log('Form Submitted!');
   };
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
+
+  const selectColor = (event) => {
+    setFormData({ ...formData, messageColor: event.target.style.background });
+  };
+
+  const clearFormData = () => {
+    setFormData({
+      logo: '',
+      artFileName: '',
+      message: '',
+      messageFont: null,
+      messageSize: '14px',
+      messageColor: null,
+    });
   };
 
   return (
@@ -79,7 +95,6 @@ const CustomForm = () => {
           <div className="form-text-option">
             <p>Enter your message:</p>
             <textarea name="message" onChange={handleChange}></textarea>
-            <button>Update</button>
           </div>
           <div className="form-text-size-option"></div>
           <p>Choose font:</p>
@@ -98,13 +113,26 @@ const CustomForm = () => {
             onChange={handleChange}
           >
             <option value="14px">14px</option>
-            <option value="16px">14px</option>
-            <option value="18px">14px</option>
+            <option value="16px">16px</option>
+            <option value="18px">18px</option>
           </select>
           <p>Choose color:</p>
-          <div className="color-palettes"></div>
+          <div className="color-palettes">
+            <ColorPalette
+              selectColor={selectColor}
+              color={ColorPalette.hexCode}
+            />
+          </div>
         </div>
-        <button>Finish</button>
+        <div className="buttons">
+          <Button
+            className={'secondary'}
+            text={'Cancel'}
+            onClick={clearFormData}
+            type="reset"
+          />
+          <Button className={'primary'} text={'Finish'} type="submit" />
+        </div>
       </form>
     </div>
   );
