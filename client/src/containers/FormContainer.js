@@ -2,10 +2,10 @@ import React from 'react';
 import CustomForm from '../components/CustomForm';
 import './FormContainer.scss';
 
-const FormContainer = () => {
+const FormContainer = (props) => {
   return (
     <div className="form-container">
-      <CustomForm />
+      <CustomForm  content={props.content}/>
     </div>
   );
 };
