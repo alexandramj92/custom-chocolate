@@ -1,4 +1,14 @@
 .chocolatebarcustomizer {
-    height: 100vh;
+    .grid-container {
+        display: grid;
+        grid-column-gap: 10px;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        padding: 50px;
+        justify-items: center;
+        margin-top: -47px;
+
+
+      }
+      
 }
 
