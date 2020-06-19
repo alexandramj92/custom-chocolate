@@ -6,44 +6,65 @@ import Button from '../UI/Button/Button';
 import ColorPalette from '../ColorPalette/ColorPalette';
 import './CustomForm.scss';
 
-const CustomForm = (props) => {
-  const [formData, setFormData] = useState({
-    logo: '',
-    artFileName: '',
-    message: '',
-    messageFont: null,
-    messageSize: '14px',
-    messageColor: null,
-  });
+const CustomForm = ({
+  content,
+  handleSubmit,
+  handleChange,
+  selectColor,
+  clearFormData,
+  formData,
+}) => {
+  // const [formData, setFormData] = useState({
+  //   logo: '',
+  //   artFileName: '',
+  //   message: '',
+  //   messageFont: null,
+  //   messageSize: '14px',
+  //   messageColor: null,
+  // });
 
-  const handleSubmit = (event) => {
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   console.log(formData);
+  // };
+
+  // const handleChange = (event) => {
+  //   setFormData({ ...formData, [event.target.name]: event.target.value });
+  // };
+
+  // const selectColor = (event) => {
+  //   setFormData({ ...formData, messageColor: event.target.style.background });
+  // };
+
+  // const clearFormData = () => {
+  //   setFormData({
+  //     logo: '',
+  //     artFileName: '',
+  //     message: '',
+  //     messageFont: null,
+  //     messageSize: '14px',
+  //     messageColor: null,
+  //   });
+  // };
+
+  const formSubmit = (event) => {
     event.preventDefault();
+    handleSubmit(event);
     console.log(formData);
   };
 
-  const handleChange = (event) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
+  const formChange = (event) => {
+    handleChange(event);
   };
 
-  const selectColor = (event) => {
-    setFormData({ ...formData, messageColor: event.target.style.background });
-  };
-
-  const clearFormData = () => {
-    setFormData({
-      logo: '',
-      artFileName: '',
-      message: '',
-      messageFont: null,
-      messageSize: '14px',
-      messageColor: null,
-    });
+  const formColor = (event) => {
+    selectColor(event);
   };
 
   return (
     <div className="custom-form">
       <h2 className="form-header">Customize</h2>
-      <form name="customization-form" method="post" onSubmit={handleSubmit}>
+      <form name="customization-form" method="post" onSubmit={formSubmit}>
         <div className="form-logo-option">
           <h4>Logo</h4>
           <div className="form-check-option">
@@ -51,9 +72,8 @@ const CustomForm = (props) => {
               type="radio"
               name="logo"
               value="march-logo"
-              checked={true}
               className="form-logo-input"
-              onChange={handleChange}
+              onChange={formChange}
             />
             <img src={MarchLogo} alt="March-Logo" className="form-logo-img" />
           </div>
@@ -63,19 +83,19 @@ const CustomForm = (props) => {
               name="logo"
               value="sorbet-logo"
               className="form-logo-input"
-              onChange={handleChange}
+              onChange={formChange}
             />
             <img src={SorbetLogo} alt="Sorbet-Logo" className="form-logo-img" />
           </div>
         </div>
         <div className="form-wrapper-art-option">
           <h4>Wrapper Art</h4>
-          <ImageUpload content={props.content} />
+          <ImageUpload content={content} />
           <div className="form-art-templates">
             <select
               className="form-art-selection"
               name="artFileName"
-              onChange={handleChange}
+              onChange={formChange}
             >
               <option value="template1" className="form-art-option">
                 Template 1
@@ -96,14 +116,14 @@ const CustomForm = (props) => {
           <h4>Personal Message</h4>
           <div className="form-text-option">
             <p>Enter your message:</p>
-            <textarea name="message" onChange={handleChange}></textarea>
+            <textarea name="message" onChange={formChange}></textarea>
           </div>
           <div className="form-text-size-option"></div>
           <p>Choose font:</p>
           <select
             className="form-text-font-selection"
             name="messageFont"
-            onChange={handleChange}
+            onChange={formChange}
           >
             <option value="March">March</option>
             <option value="Bon-Vivant">Bon Vivant</option>
@@ -112,7 +132,7 @@ const CustomForm = (props) => {
           <select
             className="form-text-size-selection"
             name="messageSize"
-            onChange={handleChange}
+            onChange={formChange}
           >
             <option value="14px">14px</option>
             <option value="16px">16px</option>
@@ -121,7 +141,7 @@ const CustomForm = (props) => {
           <p>Choose color:</p>
           <div className="color-palettes">
             <ColorPalette
-              selectColor={selectColor}
+              selectColor={formColor}
               color={ColorPalette.hexCode}
             />
           </div>
