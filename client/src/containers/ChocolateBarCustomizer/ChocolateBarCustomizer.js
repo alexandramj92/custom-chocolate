@@ -25,6 +25,15 @@ const ChocolateBarCustomizer = () => {
   const [uploading, setUploading] = useState(false);
   const [images, setImages] = useState([]);
 
+  const [formData, setFormData] = useState({
+    logo: '',
+    artFileName: '',
+    message: '',
+    messageFont: null,
+    messageSize: '14px',
+    messageColor: null,
+  });
+
   const onChange = (e) => {
     const files = Array.from(e.target.files);
     // this.setState({ uploading: true })
@@ -65,13 +74,57 @@ const ChocolateBarCustomizer = () => {
 
   //   console.log(images.map((image, i) => console.log(image.secure_url)))
 
+  const handleSubmit = (event) => {
+    if (event) {
+      event.preventDefault();
+      console.log(formData);
+    } else {
+      return;
+    }
+  };
+
+  const handleChange = (event) => {
+    if (event) {
+      setFormData({ ...formData, [event.target.name]: event.target.value });
+    } else {
+      return;
+    }
+  };
+
+  const selectColor = (event) => {
+    if (event) {
+      setFormData({ ...formData, messageColor: event.target.style.background });
+    } else {
+      return;
+    }
+  };
+
+  const clearFormData = () => {
+    setFormData({
+      logo: '',
+      artFileName: '',
+      message: '',
+      messageFont: null,
+      messageSize: '14px',
+      messageColor: null,
+    });
+  };
+
   return (
     <div className="chocolatebarcustomizer">
       {/* <ImageUpload content={content()} /> */}
 
       <div className="grid-container">
         <div className="grid-item">
-          <FormContainer content={content()} />
+          <FormContainer
+            content={content()}
+            handleSubmit={() => handleSubmit()}
+            handleChange={() => handleChange()}
+            selectColor={() => selectColor()}
+            clearFormData={() => clearFormData()}
+            formData={formData}
+            setFormData={setFormData}
+          />
         </div>
         <div className="grid-item">
           <PreviewBox

@@ -2,10 +2,26 @@ import React from 'react';
 import CustomForm from '../../components/CustomForm/CustomForm';
 import './FormContainer.scss';
 
-const FormContainer = (props) => {
+const FormContainer = ({
+  content,
+  handleSubmit,
+  handleChange,
+  selectColor,
+  clearFormData,
+  formData,
+  setFormData,
+}) => {
   return (
     <div className="form-container">
-      <CustomForm content={props.content} />
+      <CustomForm
+        content={content}
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+        selectColor={selectColor}
+        clearFormData={clearFormData}
+        formData={formData}
+        setFormData={setFormData}
+      />
     </div>
   );
 };
