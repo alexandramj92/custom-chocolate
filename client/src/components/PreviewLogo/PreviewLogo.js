@@ -13,7 +13,7 @@ const previewLogo = props => {
         return (
 
             
-            <DraggableDiv> <img style={{ height: '50px' }} src={props.previewLogo}/> </DraggableDiv>
+            <DraggableDiv> <img style={{ height: '150px' }} src={props.previewLogo}/> </DraggableDiv>
     
         );
 

@@ -13,6 +13,7 @@ const CustomForm = ({
   selectColor,
   clearFormData,
   formData,
+  setFormData
 }) => {
   // const [formData, setFormData] = useState({
   //   logo: '',
@@ -71,7 +72,7 @@ const CustomForm = ({
             <input
               type="radio"
               name="logo"
-              value="march-logo"
+              value="MarchLogo"
               className="form-logo-input"
               onChange={formChange}
             />
@@ -81,7 +82,7 @@ const CustomForm = ({
             <input
               type="radio"
               name="logo"
-              value="sorbet-logo"
+              value="SorbetLogo"
               className="form-logo-input"
               onChange={formChange}
             />
