@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PreviewBox from '../PreviewBox/PreviewBox';
 import FormContainer from '../FormContainer/FormContainer';
 
 import './ChocolateBarCustomizer.scss';
 
-import Logo1 from '../../assets/logos/march_logo.png';
-import Logo2 from '../../assets/logos/sorbet_logo.png';
+import MarchLogo from '../../assets/logos/march_logo.png';
+import SorbetLogo from '../../assets/logos/sorbet_logo.png';
 import testImage from '../../assets/wrapperImages/testimage.jpg';
 import ImageUpload from '../../components/ImageUpload/ImageUpload';
 
@@ -15,24 +15,38 @@ import ImageUploadButton from '../../components/UI/ImageUploadButton/ImageUpload
 import { API_URL } from '../../config';
 
 const ChocolateBarCustomizer = () => {
-  const [logoSelection, setLogoSelection] = useState(Logo1);
+  const [logoSelection, setLogoSelection] = useState();
   const [message, setMessage] = useState(
     'Happy Birtday Jessica! Hope you have a wonderful day.'
   );
   const [messageFontSize, setMessageFontSize] = useState('30px');
-  const [messageColor, setMessageColor] = useState('#0C527D');
+  // const [messageColor, setMessageColor] = useState('#0C527D');
   const [wrapperDesign, setWrapperDesign] = useState(testImage);
   const [uploading, setUploading] = useState(false);
   const [images, setImages] = useState([]);
 
   const [formData, setFormData] = useState({
-    logo: '',
+    logo: 'SorbetLogo',
     artFileName: '',
     message: '',
     messageFont: null,
     messageSize: '14px',
-    messageColor: null,
+    messageColor: '#0C527D',
   });
+
+  useEffect( () => {
+    setLogoState()
+  }, [formData])
+
+  
+
+  const setLogoState = () => {
+    if (formData.logo === 'MarchLogo') {
+      setLogoSelection(MarchLogo)
+    } else {
+      setLogoSelection(SorbetLogo)
+    }
+  }
 
   const onChange = (e) => {
     const files = Array.from(e.target.files);
@@ -86,6 +100,7 @@ const ChocolateBarCustomizer = () => {
   const handleChange = (event) => {
     if (event) {
       setFormData({ ...formData, [event.target.name]: event.target.value });
+      console.log(event.target.value);
     } else {
       return;
     }
@@ -118,9 +133,9 @@ const ChocolateBarCustomizer = () => {
         <div className="grid-item">
           <FormContainer
             content={content()}
-            handleSubmit={() => handleSubmit()}
-            handleChange={() => handleChange()}
-            selectColor={() => selectColor()}
+            handleSubmit={(e) => handleSubmit(e)}
+            handleChange={(e) => handleChange(e)}
+            selectColor={(e) => selectColor(e)}
             clearFormData={() => clearFormData()}
             formData={formData}
             setFormData={setFormData}
@@ -130,8 +145,8 @@ const ChocolateBarCustomizer = () => {
           <PreviewBox
             logoSelected={logoSelection}
             images={images}
-            messageSelected={message}
-            messageColorSelected={messageColor}
+            messageSelected={formData.message}
+            messageColorSelected={formData.messageColor}
             messageFontSizeSelected={messageFontSize}
             wrapperDesignSelected={wrapperDesign}
           />
