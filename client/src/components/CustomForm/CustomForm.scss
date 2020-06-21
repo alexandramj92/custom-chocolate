@@ -11,6 +11,12 @@ form {
 
   .form-logo-option {
     width: 100%;
+
+    img {
+      border: none;
+      display: inline;
+      max-width: 100px;
+    }
   }
 
   h4 {
@@ -31,13 +37,6 @@ form {
   input {
     display: flex;
   }
-
-  .form-logo-img {
-    max-height: 2rem;
-    margin: 0.5rem 0.75rem;
-    display: flex;
-  }
-
   .form-art-selection {
     min-width: 16rem;
     border: 0.5px solid #c9c9c9;
@@ -46,6 +45,12 @@ form {
 
     .form-art.option {
       padding: 0.5rem 0.5rem;
+    }
+  }
+
+  .form-art-templates {
+    p {
+      font-weight: normal;
     }
   }
 
