@@ -29,6 +29,7 @@ const previewBox = props => {
     previewMessage={props.messageSelected}
     fontSize={props.messageFontSizeSelected}
     messageColor = {props.messageColorSelected}
+    messageFont={props.messageFontSelected}
      />
     </div>
     </div>

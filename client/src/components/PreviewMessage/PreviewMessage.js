@@ -10,11 +10,13 @@ const previewMessage = props => {
     console.log(props.messageColor)
     const messageColor = props.messageColor;
     const fontSize = props.fontSize;
+    const fontFamily = 'font' + props.messageFont;
+    console.log(fontFamily);
 
 
         return (
 
-            <DraggableDiv> <p style={{color: messageColor, fontSize: fontSize }}> {props.previewMessage} </p> </DraggableDiv>
+            <DraggableDiv> <p className={fontFamily} id="messagePrev" style={{color: messageColor, fontSize: fontSize }}> {props.previewMessage} </p> </DraggableDiv>
     
         );
 

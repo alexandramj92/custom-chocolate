@@ -147,8 +147,9 @@ const ChocolateBarCustomizer = () => {
             images={images}
             messageSelected={formData.message}
             messageColorSelected={formData.messageColor}
-            messageFontSizeSelected={messageFontSize}
+            messageFontSizeSelected={formData.messageSize}
             wrapperDesignSelected={wrapperDesign}
+            messageFontSelected={formData.messageFont}
           />
         </div>
       </div>
