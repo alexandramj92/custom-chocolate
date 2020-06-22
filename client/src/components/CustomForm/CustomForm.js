@@ -13,41 +13,8 @@ const CustomForm = ({
   selectColor,
   clearFormData,
   formData,
-  setFormData
+  setFormData,
 }) => {
-  // const [formData, setFormData] = useState({
-  //   logo: '',
-  //   artFileName: '',
-  //   message: '',
-  //   messageFont: null,
-  //   messageSize: '14px',
-  //   messageColor: null,
-  // });
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   console.log(formData);
-  // };
-
-  // const handleChange = (event) => {
-  //   setFormData({ ...formData, [event.target.name]: event.target.value });
-  // };
-
-  // const selectColor = (event) => {
-  //   setFormData({ ...formData, messageColor: event.target.style.background });
-  // };
-
-  // const clearFormData = () => {
-  //   setFormData({
-  //     logo: '',
-  //     artFileName: '',
-  //     message: '',
-  //     messageFont: null,
-  //     messageSize: '14px',
-  //     messageColor: null,
-  //   });
-  // };
-
   const formSubmit = (event) => {
     event.preventDefault();
     handleSubmit(event);
@@ -93,6 +60,7 @@ const CustomForm = ({
           <h4>Wrapper Art</h4>
           <ImageUpload content={content} />
           <div className="form-art-templates">
+            <p>Choose existing design</p>
             <select
               className="form-art-selection"
               name="artFileName"
