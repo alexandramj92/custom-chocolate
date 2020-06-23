@@ -106,6 +106,12 @@ const CustomForm = ({
             <option value="14px">14px</option>
             <option value="16px">16px</option>
             <option value="18px">18px</option>
+            <option value="22px">18px</option>
+            <option value="26px">18px</option>
+            <option value="30px">18px</option>
+
+
+
           </select>
           <p>Choose color:</p>
           <div className="color-palettes">
