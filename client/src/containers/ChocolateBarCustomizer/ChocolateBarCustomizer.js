@@ -16,9 +16,9 @@ import { API_URL } from '../../config';
 
 const ChocolateBarCustomizer = () => {
   const [logoSelection, setLogoSelection] = useState();
-  const [message, setMessage] = useState(
-    'Happy Birtday Jessica! Hope you have a wonderful day.'
-  );
+  // const [message, setMessage] = useState(
+  //   'Happy Birtday Jessica! Hope you have a wonderful day.'
+  // );
   const [messageFontSize, setMessageFontSize] = useState('30px');
   // const [messageColor, setMessageColor] = useState('#0C527D');
   const [wrapperDesign, setWrapperDesign] = useState(testImage);
@@ -34,19 +34,17 @@ const ChocolateBarCustomizer = () => {
     messageColor: '#0C527D',
   });
 
-  useEffect( () => {
-    setLogoState()
-  }, [formData])
-
-  
+  useEffect(() => {
+    setLogoState();
+  }, [formData]);
 
   const setLogoState = () => {
     if (formData.logo === 'MarchLogo') {
-      setLogoSelection(MarchLogo)
+      setLogoSelection(MarchLogo);
     } else {
-      setLogoSelection(SorbetLogo)
+      setLogoSelection(SorbetLogo);
     }
-  }
+  };
 
   const onChange = (e) => {
     const files = Array.from(e.target.files);
