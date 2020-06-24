@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ImageUpload from '../ImageUpload/ImageUpload';
 import MarchLogo from '../../assets/logos/march_logo.png';
 import SorbetLogo from '../../assets/logos/sorbet_logo.png';
@@ -106,12 +106,9 @@ const CustomForm = ({
             <option value="14px">14px</option>
             <option value="16px">16px</option>
             <option value="18px">18px</option>
-            <option value="22px">18px</option>
-            <option value="26px">18px</option>
-            <option value="30px">18px</option>
-
-
-
+            <option value="22px">22px</option>
+            <option value="26px">26px</option>
+            <option value="30px">30px</option>
           </select>
           <p>Choose color:</p>
           <div className="color-palettes">
