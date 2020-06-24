@@ -6,7 +6,14 @@ import './ChocolateBarCustomizer.scss';
 
 import MarchLogo from '../../assets/logos/march_logo.png';
 import SorbetLogo from '../../assets/logos/sorbet_logo.png';
-import testImage from '../../assets/wrapperImages/testimage.jpg';
+import patternFour from '../../assets/wrapperImages/patternFour.jpg';
+import patternOne from '../../assets/wrapperImages/patternOne.jpg';
+import patternTwo from '../../assets/wrapperImages/patternTwo.png';
+import patternThree from '../../assets/wrapperImages/patternThree.jpg';
+
+// import patternTwo from '../../assets/wrapperImages/patternTwo.jpg';
+// import patternThree from '../../assets/wrapperImages/patternThree.jpg';
+
 import ImageUpload from '../../components/ImageUpload/ImageUpload';
 
 import Spinner from '../../components/UI/Spinner/Spinner';
@@ -19,9 +26,9 @@ const ChocolateBarCustomizer = () => {
   // const [message, setMessage] = useState(
   //   'Happy Birtday Jessica! Hope you have a wonderful day.'
   // );
-  const [messageFontSize, setMessageFontSize] = useState('30px');
+  // const [messageFontSize, setMessageFontSize] = useState('30px');
   // const [messageColor, setMessageColor] = useState('#0C527D');
-  const [wrapperDesign, setWrapperDesign] = useState(testImage);
+  const [wrapperDesign, setWrapperDesign] = useState(patternOne);
   const [uploading, setUploading] = useState(false);
   const [images, setImages] = useState([]);
 
@@ -36,6 +43,7 @@ const ChocolateBarCustomizer = () => {
 
   useEffect(() => {
     setLogoState();
+    setDesign();
   }, [formData]);
 
   const setLogoState = () => {
@@ -43,6 +51,22 @@ const ChocolateBarCustomizer = () => {
       setLogoSelection(MarchLogo);
     } else {
       setLogoSelection(SorbetLogo);
+    }
+  };
+
+  const setDesign = () => {
+    if (formData.artFileName === 'template1') {
+      setImages([]);
+      setWrapperDesign(patternOne);
+    } else if (formData.artFileName === 'template2') {
+      setImages([]);
+      setWrapperDesign(patternTwo);
+    } else if (formData.artFileName === 'template3') {
+      setImages([]);
+      setWrapperDesign(patternThree);
+    } else if (formData.artFileName === 'template4') {
+      setImages([]);
+      setWrapperDesign(patternFour);
     }
   };
 
