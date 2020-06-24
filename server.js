@@ -9,11 +9,20 @@ const { CLIENT_ORIGIN } = require('./config')
 
 const app = express()
 
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
+
 cloudinary.config({ 
   cloud_name: process.env.CLOUD_NAME, 
   api_key: process.env.API_KEY, 
   api_secret: process.env.API_SECRET
 })
+
+
   
 app.use(cors({ 
   origin: CLIENT_ORIGIN 
@@ -35,11 +44,6 @@ app.post('/image-upload', (req, res) => {
 })
 
 
-app.use(express.static(path.join(__dirname, 'build')));
 
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
-app.listen(process.env.PORT || 8080, () => console.log('👍'))
+app.listen(process.env.PORT || 3000, () => console.log('👍'))
