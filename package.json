@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server"
   },
@@ -15,7 +16,8 @@
     "cors": "^2.8.4",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
-    "express-form-data": "^2.0.6"
+    "express-form-data": "^2.0.6",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "nodemon": "^1.18.4"
