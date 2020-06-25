@@ -10,7 +10,7 @@
     "dev": "nodemon server"
   },
   "proxy": "http://localhost:8080",
-  "author": "jesse heaslip",
+  "author": "alexandra jackson and stephanie aurelio",
   "license": "MIT",
   "dependencies": {
     "cloudinary": "^1.11.0",
