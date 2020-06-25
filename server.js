@@ -3,18 +3,14 @@ const express = require('express')
 const path = require('path')
 const cloudinary = require('cloudinary')
 const formData = require('express-form-data')
-const cors = require('cors')
-const { CLIENT_ORIGIN } = require('./config')
+// const cors = require('cors')
+// const { CLIENT_ORIGIN } = require('./config')
 
 
 const app = express()
-
+app.use(formData.parse())
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-});
 
 cloudinary.config({ 
   cloud_name: process.env.CLOUD_NAME, 
@@ -24,11 +20,10 @@ cloudinary.config({
 
 
   
-app.use(cors({ 
-  origin: CLIENT_ORIGIN 
-})) 
+// app.use(cors({ 
+//   origin: CLIENT_ORIGIN 
+// })) 
 
-app.use(formData.parse())
 
 app.get('/wake-up', (req, res) => res.send('👌'))
 
@@ -42,6 +37,12 @@ app.post('/image-upload', (req, res) => {
     .then(results => res.json(results))
     .catch((err) => res.status(400).json(err))
 })
+
+
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
 
 
 
