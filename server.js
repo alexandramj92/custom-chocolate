@@ -46,4 +46,4 @@ app.post('/image-upload', (req, res) => {
 
 
 
-app.listen(process.env.PORT || 3000, () => console.log('👍'))
+app.listen(process.env.PORT || 8080, () => console.log('👍'))
