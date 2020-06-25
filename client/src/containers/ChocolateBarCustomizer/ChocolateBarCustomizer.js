@@ -96,6 +96,7 @@ const ChocolateBarCustomizer = () => {
       .then((images) => {
         setUploading(false);
         setImages(images);
+        console.log(images, "This is the image url");
       });
   };
 
