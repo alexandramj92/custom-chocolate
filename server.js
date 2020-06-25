@@ -32,4 +32,10 @@ app.post('/image-upload', (req, res) => {
     .catch((err) => res.status(400).json(err))
 })
 
+// Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === "production") {
+  
+  app.use(express.static("client/build"));
+}
+
 app.listen(process.env.PORT || 8080, () => console.log('👍'))

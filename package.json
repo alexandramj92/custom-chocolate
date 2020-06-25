@@ -1,0 +1,29 @@
+{
+  "name": "react-image-upload-server",
+  "version": "0.0.1",
+  "description": "Image upload example with React",
+  "main": "server.js",
+  "scripts": {
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd client && npm run start",
+    "install": "cd client && npm install",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build"
+  },
+  "author": "alexandra jackson and stephanie aurelio",
+  "license": "MIT",
+  "dependencies": {
+    "cloudinary": "^1.11.0",
+    "cors": "^2.8.4",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "express-form-data": "^2.0.6",
+    "if-env": "^1.0.4"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.2",
+    "nodemon": "^1.18.4"
+  }
+}
