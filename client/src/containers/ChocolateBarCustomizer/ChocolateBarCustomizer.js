@@ -11,16 +11,15 @@ import patternOne from '../../assets/wrapperImages/patternOne.jpg';
 import patternTwo from '../../assets/wrapperImages/patternTwo.png';
 import patternThree from '../../assets/wrapperImages/patternThree.jpg';
 
-
 // import patternTwo from '../../assets/wrapperImages/patternTwo.jpg';
 // import patternThree from '../../assets/wrapperImages/patternThree.jpg';
-
 
 import ImageUpload from '../../components/ImageUpload/ImageUpload';
 
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Images from '../../components/Images/Images';
 import ImageUploadButton from '../../components/UI/ImageUploadButton/ImageUploadButton';
+
 import { API_URL } from '../../config';
 
 const ChocolateBarCustomizer = () => {
@@ -43,38 +42,34 @@ const ChocolateBarCustomizer = () => {
     messageColor: '#0C527D',
   });
 
-  useEffect( () => {
-    setLogoState()
-    setDesign()
-  }, [formData])
-
-  
+  useEffect(() => {
+    setLogoState();
+    setDesign();
+  }, [formData]);
 
   const setLogoState = () => {
     if (formData.logo === 'MarchLogo') {
-      setLogoSelection(MarchLogo)
+      setLogoSelection(MarchLogo);
     } else {
-      setLogoSelection(SorbetLogo)
+      setLogoSelection(SorbetLogo);
     }
-  }
+  };
 
   const setDesign = () => {
     if (formData.artFileName === 'template1') {
       setImages([]);
       setWrapperDesign(patternOne);
-    } else if(formData.artFileName === 'template2') {
+    } else if (formData.artFileName === 'template2') {
       setImages([]);
       setWrapperDesign(patternTwo);
-    } else if(formData.artFileName === 'template3') {
+    } else if (formData.artFileName === 'template3') {
       setImages([]);
       setWrapperDesign(patternThree);
     } else if (formData.artFileName === 'template4') {
       setImages([]);
       setWrapperDesign(patternFour);
     }
-
-
-  }
+  };
 
   const onChange = (e) => {
     const files = Array.from(e.target.files);
@@ -119,7 +114,6 @@ const ChocolateBarCustomizer = () => {
   const handleSubmit = (event) => {
     if (event) {
       event.preventDefault();
-      console.log(formData);
     } else {
       return;
     }
