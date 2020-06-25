@@ -3,8 +3,8 @@ const express = require('express')
 const path = require('path')
 const cloudinary = require('cloudinary')
 const formData = require('express-form-data')
-// const cors = require('cors')
-// const { CLIENT_ORIGIN } = require('./config')
+const cors = require('cors')
+const { CLIENT_ORIGIN } = require('./config')
 
 
 const app = express()
@@ -19,9 +19,9 @@ cloudinary.config({
 
 
   
-// app.use(cors({ 
-//   origin: CLIENT_ORIGIN 
-// })) 
+app.use(cors({ 
+  origin: CLIENT_ORIGIN 
+})) 
 
 
 app.get('/wake-up', (req, res) => res.send('👌'))
