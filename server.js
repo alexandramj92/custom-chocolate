@@ -45,6 +45,16 @@ app.get('/*', (req, res) => {
 });
 
 
+// Serve static assets in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static(path.join(__dirname, 'client/build')));
+  app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
+}
+
+
 
 
 app.listen(process.env.PORT || 8080, () => console.log('👍'))
