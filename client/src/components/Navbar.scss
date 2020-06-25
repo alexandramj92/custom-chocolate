@@ -30,6 +30,10 @@
 
   .nav-logo {
     flex: 2 1 40rem;
+    img {
+      max-height: 100px;
+      margin: 0;
+    }
   }
 }
 

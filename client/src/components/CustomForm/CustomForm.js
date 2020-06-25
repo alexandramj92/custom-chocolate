@@ -4,6 +4,7 @@ import MarchLogo from '../../assets/logos/march_logo.png';
 import SorbetLogo from '../../assets/logos/sorbet_logo.png';
 import Button from '../UI/Button/Button';
 import ColorPalette from '../ColorPalette/ColorPalette';
+import { navigate } from '@reach/router';
 import './CustomForm.scss';
 
 const CustomForm = ({
@@ -18,7 +19,9 @@ const CustomForm = ({
   const formSubmit = (event) => {
     event.preventDefault();
     handleSubmit(event);
-    console.log(formData);
+    if (event) {
+      navigate('/success');
+    }
   };
 
   const formChange = (event) => {
@@ -119,12 +122,12 @@ const CustomForm = ({
           </div>
         </div>
         <div className="buttons">
-          <Button
+          {/* <Button
             className={'secondary'}
             text={'Cancel'}
             onClick={clearFormData}
             type="reset"
-          />
+          /> */}
           <Button className={'primary'} text={'Finish'} type="submit" />
         </div>
       </form>

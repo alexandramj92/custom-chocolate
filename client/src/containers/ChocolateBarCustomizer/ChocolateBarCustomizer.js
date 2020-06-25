@@ -19,6 +19,7 @@ import ImageUpload from '../../components/ImageUpload/ImageUpload';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Images from '../../components/Images/Images';
 import ImageUploadButton from '../../components/UI/ImageUploadButton/ImageUploadButton';
+
 import { API_URL } from '../../config';
 
 const ChocolateBarCustomizer = () => {
@@ -113,7 +114,6 @@ const ChocolateBarCustomizer = () => {
   const handleSubmit = (event) => {
     if (event) {
       event.preventDefault();
-      console.log(formData);
     } else {
       return;
     }

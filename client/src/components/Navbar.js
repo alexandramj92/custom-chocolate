@@ -1,10 +1,13 @@
 import React from 'react';
+import NavLogo from '../assets/logos/transparent-logo.png';
 import './Navbar.scss';
 
 const Navbar = () => {
   return (
     <nav className="nav">
-      <h2 className="nav-logo">LOGO</h2>
+      <h2 className="nav-logo">
+        <img src={NavLogo} alt="Logo" />
+      </h2>
       <ul>
         <li>
           <a href="https://chelseaandthechocolatefactory.com/" title="home">

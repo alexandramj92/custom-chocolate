@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from '@reach/router';
 import './Success.scss';
 
 const Success = () => {
@@ -6,11 +7,15 @@ const Success = () => {
     <div className="success-container">
       <h2>Sweet success!</h2>
       <p>Custom order has been added to cart.</p>
+      <Link to="/">
+        <p className="success-link">Create another</p>
+      </Link>
+      <p className="success-link">|</p>
       <a
         href="https://chelseaandthechocolatefactory.com/collections/all"
         title="catalog"
       >
-        <p>Return to catalog</p>
+        <p className="success-link">Return to catalog</p>
       </a>
     </div>
   );
