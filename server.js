@@ -34,7 +34,15 @@ app.post('/image-upload', (req, res) => {
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
+  require('dotenv').config();
+
   app.use(express.static("client/build"));
+
+  cloudinary.config({ 
+    cloud_name: process.env.CLOUD_NAME, 
+    api_key: process.env.API_KEY, 
+    api_secret: process.env.API_SECRET
+  })
 }
 
 app.listen(process.env.PORT || 8080, () => console.log('👍'))
