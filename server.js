@@ -9,7 +9,6 @@ const { CLIENT_ORIGIN } = require('./config')
 
 const app = express()
 app.use(formData.parse())
-app.use(express.static(__dirname + '/'));
 
 
 
