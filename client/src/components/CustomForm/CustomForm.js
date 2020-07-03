@@ -5,7 +5,11 @@ import SorbetLogo from '../../assets/logos/sorbet_logo.png';
 import Button from '../UI/Button/Button';
 import ColorPalette from '../ColorPalette/ColorPalette';
 import { navigate } from '@reach/router';
+import axios from 'axios';
+
 import './CustomForm.scss';
+
+
 
 const CustomForm = ({
   content,
@@ -17,11 +21,53 @@ const CustomForm = ({
   isComplete,
   setIsComplete,
 }) => {
+
+  
+
+
+
   const formSubmit = (event) => {
     event.preventDefault();
     if (formData.artFileName !== '' && formData.message !== '') {
+      const MSG = {
+        to: 'alexandra.michelle.j@gmail.com',
+        from: 'alexandra.michelle.j@gmail.com',
+        subject: 'New Design',
+        text: ' ',
+        html: '<div style="text-align:center;font-size:22px">' +
+        '<h2>You have received a new lead!</h2>' +
+        '<ul style="text-align: left;font-size:16px">' +
+        '<li>Logo: ' + formData.logo + '</li>' +
+        '<li>Art File Name: ' + formData.artFileName + '</li>' +
+        '<li>Message: ' + formData.message + '</li>' +
+        '<li>Message Font: ' + formData.messageFont + '</li>' +
+        '<li>Message Size: ' + formData.messageSize + '</li>' +
+        '<li>Message Color: ' + formData.messageColor + '</li>' +
+    
+        '</ul>' +
+        '</div>',
+      }
+
+      // axios.post('/api/email', MSG)
+      // .then(function (response) {
+      //   console.log(response);
+      // })
+      // .catch(function (error) {
+      //   console.log(error);
+      // });
+      axios.post('/api/email', MSG )
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
+
+      // fetch('/api/email', {
+      //   method: 'POST',
+      //   body: MSG,
+      // });
+
       setIsComplete(true);
-      navigate('/success');
+      // navigate('/success');
       console.log('Success');
     } else {
       console.log('Form is missing data');

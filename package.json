@@ -15,12 +15,14 @@
   "author": "alexandra jackson and stephanie aurelio",
   "license": "MIT",
   "dependencies": {
+    "@sendgrid/mail": "^7.2.1",
     "cloudinary": "^1.11.0",
     "cors": "^2.8.4",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "express-form-data": "^2.0.6",
-    "if-env": "^1.0.4"
+    "if-env": "^1.0.4",
+    "sendgrid": "^5.2.3"
   },
   "devDependencies": {
     "concurrently": "^4.1.2",
