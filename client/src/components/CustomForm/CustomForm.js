@@ -9,18 +9,22 @@ import './CustomForm.scss';
 
 const CustomForm = ({
   content,
-  handleSubmit,
   handleChange,
   selectColor,
   clearFormData,
   formData,
   setFormData,
+  isComplete,
+  setIsComplete,
 }) => {
   const formSubmit = (event) => {
     event.preventDefault();
-    handleSubmit(event);
-    if (event) {
+    if (formData.artFileName !== '' && formData.message !== '') {
+      setIsComplete(true);
       navigate('/success');
+      console.log('Success');
+    } else {
+      console.log('Form is missing data');
     }
   };
 
@@ -30,6 +34,10 @@ const CustomForm = ({
 
   const formColor = (event) => {
     selectColor(event);
+  };
+
+  const handleClear = () => {
+    clearFormData();
   };
 
   return (
@@ -122,13 +130,13 @@ const CustomForm = ({
           </div>
         </div>
         <div className="buttons">
-          {/* <Button
+          <Button
             className={'secondary'}
             text={'Cancel'}
-            onClick={clearFormData}
-            type="reset"
-          /> */}
-          <Button className={'primary'} text={'Finish'} type="submit" />
+            type={'reset'}
+            onClick={handleClear}
+          />
+          <Button className={'primary'} text={'Finish'} type="submit" />{' '}
         </div>
       </form>
     </div>
