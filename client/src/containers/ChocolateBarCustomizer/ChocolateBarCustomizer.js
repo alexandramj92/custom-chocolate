@@ -42,6 +42,8 @@ const ChocolateBarCustomizer = () => {
     messageColor: '#0C527D',
   });
 
+  const [isComplete, setIsComplete] = useState(false);
+
   useEffect(() => {
     setLogoState();
     setDesign();
@@ -111,14 +113,6 @@ const ChocolateBarCustomizer = () => {
 
   //   console.log(images.map((image, i) => console.log(image.secure_url)))
 
-  const handleSubmit = (event) => {
-    if (event) {
-      event.preventDefault();
-    } else {
-      return;
-    }
-  };
-
   const handleChange = (event) => {
     if (event) {
       setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -138,12 +132,12 @@ const ChocolateBarCustomizer = () => {
 
   const clearFormData = () => {
     setFormData({
-      logo: '',
+      logo: 'SorbetLogo',
       artFileName: '',
       message: '',
       messageFont: null,
       messageSize: '14px',
-      messageColor: null,
+      messageColor: '#0C527D',
     });
   };
 
@@ -155,12 +149,13 @@ const ChocolateBarCustomizer = () => {
         <div className="grid-item">
           <FormContainer
             content={content()}
-            handleSubmit={(e) => handleSubmit(e)}
             handleChange={(e) => handleChange(e)}
             selectColor={(e) => selectColor(e)}
             clearFormData={() => clearFormData()}
             formData={formData}
             setFormData={setFormData}
+            isComplete={isComplete}
+            setIsComplete={setIsComplete}
           />
         </div>
         <div className="grid-item">
