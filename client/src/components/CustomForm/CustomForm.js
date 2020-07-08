@@ -48,23 +48,16 @@ const CustomForm = ({
         '</div>',
       }
 
-      // axios.post('/api/email', MSG)
-      // .then(function (response) {
-      //   console.log(response);
-      // })
-      // .catch(function (error) {
-      //   console.log(error);
-      // });
-      axios.post('/api/email', MSG )
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      })
-
-      // fetch('/api/email', {
-      //   method: 'POST',
-      //   body: MSG,
-      // });
+      fetch('/api/email', {
+        method: 'POST',
+        body: MSG,
+        headers:{
+          'Content-Type': 'application/json'
+        }
+      }).then(res => res.json())
+      .then(response => console.log('Success:', JSON.stringify(response)))
+      .catch(error => console.error('Error:', error));
+         
 
       setIsComplete(true);
       // navigate('/success');
