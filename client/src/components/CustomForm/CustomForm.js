@@ -4,6 +4,7 @@ import MarchLogo from '../../assets/logos/march_logo.png';
 import SorbetLogo from '../../assets/logos/sorbet_logo.png';
 import Button from '../UI/Button/Button';
 import ColorPalette from '../ColorPalette/ColorPalette';
+import emailjs from 'emailjs-com';
 import { navigate } from '@reach/router';
 import './CustomForm.scss';
 
@@ -15,18 +16,54 @@ const CustomForm = ({
   formData,
   setFormData,
   isComplete,
-  setIsComplete,
+  setIsComplete
 }) => {
+
   const formSubmit = (event) => {
     event.preventDefault();
     if (formData.artFileName !== '' && formData.message !== '') {
+      const {
+        REACT_APP_EMAILJS_RECEIVER: receiverEmail,
+        REACT_APP_EMAILJS_TEMPLATEID: template,
+        REACT_APP_EMAILJS_USERID: user
+      } = process.env
+
       setIsComplete(true);
-      navigate('/success');
+
+
+      sendForm(
+        template,
+        receiverEmail,
+        formData,
+        user
+      )
+
+      
       console.log('Success');
     } else {
       console.log('Form is missing data');
     }
   };
+
+  // Note: this is using default_service, which will map to whatever
+ // default email provider you've set in your EmailJS account.
+ const sendForm = (template, receiverEmail, formData, user) => {
+  emailjs
+    .send('default_service', template, {
+        receiverEmail,
+        formData
+      },
+      user
+    )
+    .then(res => {
+      console.log("email sent");
+      navigate('/success');
+
+    })
+    // Handle errors here however you like
+    .catch(err => console.error('Failed to send feedback. Error: ', err));
+}
+
 
   const formChange = (event) => {
     handleChange(event);
