@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PreviewBox from '../PreviewBox/PreviewBox';
 import FormContainer from '../FormContainer/FormContainer';
+import domtoimage from 'dom-to-image';
+
 
 import './ChocolateBarCustomizer.scss';
 
@@ -24,22 +26,21 @@ import { API_URL } from '../../config';
 
 const ChocolateBarCustomizer = () => {
   const [logoSelection, setLogoSelection] = useState();
-  // const [message, setMessage] = useState(
-  //   'Happy Birtday Jessica! Hope you have a wonderful day.'
-  // );
-  // const [messageFontSize, setMessageFontSize] = useState('30px');
-  // const [messageColor, setMessageColor] = useState('#0C527D');
   const [wrapperDesign, setWrapperDesign] = useState(patternOne);
   const [uploading, setUploading] = useState(false);
   const [images, setImages] = useState([]);
+  const [previewImages, setPreviewImages] = useState([]);
+
 
   const [formData, setFormData] = useState({
     logo: 'SorbetLogo',
-    artFileName: '',
+    artFileName: 'Template1',
     message: '',
     messageFont: null,
     messageSize: '14px',
     messageColor: '#0C527D',
+    previewUrl: '',
+    uploadedImgUrl: ''
   });
 
   const [isComplete, setIsComplete] = useState(false);
@@ -78,27 +79,52 @@ const ChocolateBarCustomizer = () => {
     // this.setState({ uploading: true })
     setUploading(true);
 
-    const formData = new FormData();
+    const imageData = new FormData();
 
     files.forEach((file, i) => {
-      formData.append(i, file);
+      imageData.append(i, file);
     });
 
     fetch(`${API_URL}/image-upload`, {
       method: 'POST',
-      body: formData,
+      body: imageData,
     })
       // .then(res => console.log(res))
       .then((res) => res.json())
       .then((images) => {
         setUploading(false);
         setImages(images);
+        const url = images[0].url;
+        setFormData({...formData, uploadedImgUrl: url });
       });
   };
 
-  const removeImage = (id) => {
-    setImages(images.filter((image) => image.public_id !== id));
-  };
+  const convertPreviewToImage = () => {
+    domtoimage.toBlob(document.getElementById('divHtml2Canvas'))
+    .then(function (blob) {
+      const prevData = new FormData();
+      prevData.append("prevData", blob)
+
+    
+      console.log(prevData);
+
+
+      fetch(`${API_URL}/image-upload`, {
+        method: 'POST',
+        body: prevData,
+      })
+     
+        .then((res) => res.json())
+        .then((prevImages) => {
+          console.log(prevImages);
+          const url = prevImages[0].url;
+          setFormData({...formData, previewUrl:url});
+        });
+       
+    });
+    
+  }
+
 
   const content = () => {
     switch (true) {
@@ -152,13 +178,14 @@ const ChocolateBarCustomizer = () => {
             handleChange={(e) => handleChange(e)}
             selectColor={(e) => selectColor(e)}
             clearFormData={() => clearFormData()}
+            convertPrevToUrl={()=> convertPreviewToImage()}
             formData={formData}
             setFormData={setFormData}
             isComplete={isComplete}
             setIsComplete={setIsComplete}
           />
         </div>
-        <div className="grid-item">
+        <div className="grid-item" id="divHtml2Canvas">
           <PreviewBox
             logoSelected={logoSelection}
             images={images}
