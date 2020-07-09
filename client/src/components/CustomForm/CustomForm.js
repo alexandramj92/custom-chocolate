@@ -13,6 +13,7 @@ const CustomForm = ({
   handleChange,
   selectColor,
   clearFormData,
+  convertPrevToUrl,
   formData,
   setFormData,
   isComplete,
@@ -31,14 +32,15 @@ const CustomForm = ({
       setIsComplete(true);
 
 
-      sendForm(
-        template,
-        receiverEmail,
-        formData,
-        user
-      )
+      convertPreviewToUrl();
+        
+          sendForm(
+            template,
+            receiverEmail,
+            formData,
+            user
+          )
 
-      
       console.log('Success');
     } else {
       console.log('Form is missing data');
@@ -57,7 +59,7 @@ const CustomForm = ({
     )
     .then(res => {
       console.log("email sent");
-      navigate('/success');
+      // navigate('/success');
 
     })
     // Handle errors here however you like
@@ -68,6 +70,10 @@ const CustomForm = ({
   const formChange = (event) => {
     handleChange(event);
   };
+
+  const convertPreviewToUrl = () => {
+    convertPrevToUrl();
+  }
 
   const formColor = (event) => {
     selectColor(event);

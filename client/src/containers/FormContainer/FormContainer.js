@@ -7,6 +7,7 @@ const FormContainer = ({
   handleChange,
   selectColor,
   clearFormData,
+  convertPrevToUrl,
   formData,
   setFormData,
   isComplete,
@@ -19,6 +20,7 @@ const FormContainer = ({
         handleChange={handleChange}
         selectColor={selectColor}
         clearFormData={clearFormData}
+        convertPrevToUrl={convertPrevToUrl}
         formData={formData}
         setFormData={setFormData}
         isComplete={isComplete}
