@@ -59,7 +59,7 @@ const CustomForm = ({
     )
     .then(res => {
       console.log("email sent");
-      // navigate('/success');
+      navigate('/success');
 
     })
     // Handle errors here however you like
