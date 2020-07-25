@@ -13,8 +13,7 @@ import patternOne from '../../assets/wrapperImages/patternOne.jpg';
 import patternTwo from '../../assets/wrapperImages/patternTwo.png';
 import patternThree from '../../assets/wrapperImages/patternThree.jpg';
 
-// import patternTwo from '../../assets/wrapperImages/patternTwo.jpg';
-// import patternThree from '../../assets/wrapperImages/patternThree.jpg';
+
 
 import ImageUpload from '../../components/ImageUpload/ImageUpload';
 
@@ -26,14 +25,16 @@ import { API_URL } from '../../config';
 
 const ChocolateBarCustomizer = () => {
   const [logoSelection, setLogoSelection] = useState();
-  const [wrapperDesign, setWrapperDesign] = useState(patternOne);
+  const [wrapperDesign, setWrapperDesign] = useState();
   const [uploading, setUploading] = useState(false);
   const [images, setImages] = useState([]);
+  const [uploaded, setUploaded] = useState(false);
   const [previewImages, setPreviewImages] = useState([]);
+  const [selectionMade, setSelectionMade] = useState(false);
 
 
   const [formData, setFormData] = useState({
-    logo: 'SorbetLogo',
+    logo: '',
     artFileName: 'Template1',
     message: '',
     messageFont: null,
@@ -47,36 +48,40 @@ const ChocolateBarCustomizer = () => {
 
   useEffect(() => {
     setLogoState();
-    setDesign();
   }, [formData]);
 
   const setLogoState = () => {
     if (formData.logo === 'MarchLogo') {
+      setSelectionMade(true);
       setLogoSelection(MarchLogo);
-    } else {
+    } else if (formData.logo === 'SorbetLogo') {
+      setSelectionMade(true);
       setLogoSelection(SorbetLogo);
+    } else {
+      setLogoSelection();
     }
   };
 
-  const setDesign = () => {
-    if (formData.artFileName === 'template1') {
-      setImages([]);
+
+  const setDesign = (eventValue) => {
+    setSelectionMade(true);
+    setUploaded(false);
+    if (eventValue === 'noneSelected') {
+      setWrapperDesign();
+    }
+     else if (eventValue === 'template1') {
       setWrapperDesign(patternOne);
-    } else if (formData.artFileName === 'template2') {
-      setImages([]);
+    } else if (eventValue === 'template2') {
       setWrapperDesign(patternTwo);
-    } else if (formData.artFileName === 'template3') {
-      setImages([]);
+    } else if (eventValue === 'template3') {
       setWrapperDesign(patternThree);
-    } else if (formData.artFileName === 'template4') {
-      setImages([]);
+    } else if (eventValue === 'template4') {
       setWrapperDesign(patternFour);
     }
   };
 
   const onChange = (e) => {
     const files = Array.from(e.target.files);
-    // this.setState({ uploading: true })
     setUploading(true);
 
     const imageData = new FormData();
@@ -89,13 +94,14 @@ const ChocolateBarCustomizer = () => {
       method: 'POST',
       body: imageData,
     })
-      // .then(res => console.log(res))
       .then((res) => res.json())
       .then((images) => {
         setUploading(false);
+        setUploaded(true);
+        setSelectionMade(true);
         setImages(images);
         const url = images[0].url;
-        setFormData({...formData, uploadedImgUrl: url });
+        setFormData({...formData, uploadedImgUrl: url, artFileName: '' });
       });
   };
 
@@ -130,18 +136,19 @@ const ChocolateBarCustomizer = () => {
     switch (true) {
       case uploading:
         return <Spinner />;
-      //   case images.length > 0:
-      //     return <Images images={images} removeImage={removeImage} />
       default:
         return <ImageUploadButton onChange={onChange} />;
     }
   };
 
-  //   console.log(images.map((image, i) => console.log(image.secure_url)))
 
   const handleChange = (event) => {
     if (event) {
       setFormData({ ...formData, [event.target.name]: event.target.value });
+      if (event.target.name === "artFileName") {
+        setDesign(event.target.value);
+        setFormData({ ...formData, [event.target.name]: event.target.value, uploadedImgUrl: '' });
+      }
       console.log(event.target.value);
     } else {
       return;
@@ -151,6 +158,7 @@ const ChocolateBarCustomizer = () => {
   const selectColor = (event) => {
     if (event) {
       setFormData({ ...formData, messageColor: event.target.style.background });
+      setSelectionMade(true);
     } else {
       return;
     }
@@ -169,7 +177,6 @@ const ChocolateBarCustomizer = () => {
 
   return (
     <div className="chocolatebarcustomizer">
-      {/* <ImageUpload content={content()} /> */}
 
       <div className="grid-container">
         <div className="grid-item">
@@ -194,6 +201,8 @@ const ChocolateBarCustomizer = () => {
             messageFontSizeSelected={formData.messageSize}
             wrapperDesignSelected={wrapperDesign}
             messageFontSelected={formData.messageFont}
+            uploaded={uploaded}
+            selectionMade={selectionMade}
           />
         </div>
       </div>
