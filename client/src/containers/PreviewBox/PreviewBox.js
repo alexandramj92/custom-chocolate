@@ -7,13 +7,17 @@ const previewBox = props => {
 
   const wrapperDesign = props.wrapperDesignSelected;
   const userImage = props.images.map((image, i) => image.secure_url);
-  console.log(userImage)
-
+  const uploaded = props.uploaded;
+  const selectionMade = props.selectionMade;
+  let placeholder = <h1 id="placeholder"> Make your selections </h1>;
+  if(selectionMade) {
+    placeholder = "";
+  }
   const finalWrapper = () => {
     let finalWrapper;
-    if(userImage.length>0) {
+    if(uploaded) {
       finalWrapper = userImage
-    } else {
+    } else if (!uploaded) {
       finalWrapper = wrapperDesign
     }
 
@@ -24,6 +28,7 @@ const previewBox = props => {
    
     <div className="box previewBox" style={{ backgroundImage: 'url(' + finalWrapper() + ')'}}>
     <div className="previewDiv">
+    {placeholder}
     <PreviewLogo previewLogo={props.logoSelected} />
     <PreviewMessage 
     previewMessage={props.messageSelected}

@@ -22,7 +22,7 @@ const CustomForm = ({
 
   const formSubmit = (event) => {
     event.preventDefault();
-    if (formData.artFileName !== '' && formData.message !== '') {
+    if ((formData.artFileName !== '' || formData.uploadedImgUrl !== '') && formData.message !== '') {
       const {
         REACT_APP_EMAILJS_RECEIVER: receiverEmail,
         REACT_APP_EMAILJS_TEMPLATEID: template,
@@ -68,6 +68,7 @@ const CustomForm = ({
 
 
   const formChange = (event) => {
+    // event.stopPropagation();
     handleChange(event);
   };
 
@@ -120,6 +121,9 @@ const CustomForm = ({
               name="artFileName"
               onChange={formChange}
             >
+             <option value="noneSelected" className="form-art-option">
+                Choose Template
+              </option>
               <option value="template1" className="form-art-option">
                 Template 1
               </option>
