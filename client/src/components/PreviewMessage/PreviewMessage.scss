@@ -1,19 +1,23 @@
 @import '../../assets/style/variables.scss';
 
 #messagePrev {
-    font-weight: bold;
-    text-align: center;
-    min-width: 250px;
+  font-weight: normal;
+  text-align: center;
+  min-width: 250px;
 }
 
-.fontMarch {
-    font-family: $font-march ;
+.fontMeddon {
+  font-family: $font-meddon;
 }
 
-.fontRodetta {
-    font-family: $font-rodetta;
+.fontModak {
+  font-family: $font-modak;
 }
 
-.fontBon-Vivant {
-    font-family: $font-bonVivant;
+.fontMonoton {
+  font-family: $font-monoton;
+}
+
+.fontYesevaOne {
+  font-family: $font-yeseva-one;
 }

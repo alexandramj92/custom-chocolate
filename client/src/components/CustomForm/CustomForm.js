@@ -17,29 +17,25 @@ const CustomForm = ({
   formData,
   setFormData,
   isComplete,
-  setIsComplete
+  setIsComplete,
 }) => {
-
   const formSubmit = (event) => {
     event.preventDefault();
-    if ((formData.artFileName !== '' || formData.uploadedImgUrl !== '') && formData.message !== '') {
+    if (
+      (formData.artFileName !== '' || formData.uploadedImgUrl !== '') &&
+      formData.message !== ''
+    ) {
       const {
         REACT_APP_EMAILJS_RECEIVER: receiverEmail,
         REACT_APP_EMAILJS_TEMPLATEID: template,
-        REACT_APP_EMAILJS_USERID: user
-      } = process.env
+        REACT_APP_EMAILJS_USERID: user,
+      } = process.env;
 
       setIsComplete(true);
 
-
       convertPreviewToUrl();
-        
-          sendForm(
-            template,
-            receiverEmail,
-            formData,
-            user
-          )
+
+      sendForm(template, receiverEmail, formData, user);
 
       console.log('Success');
     } else {
@@ -48,24 +44,25 @@ const CustomForm = ({
   };
 
   // Note: this is using default_service, which will map to whatever
- // default email provider you've set in your EmailJS account.
- const sendForm = (template, receiverEmail, formData, user) => {
-  emailjs
-    .send('default_service', template, {
-        receiverEmail,
-        formData
-      },
-      user
-    )
-    .then(res => {
-      console.log("email sent");
-      // navigate('/success');
-
-    })
-    // Handle errors here however you like
-    .catch(err => console.error('Failed to send feedback. Error: ', err));
-}
-
+  // default email provider you've set in your EmailJS account.
+  const sendForm = (template, receiverEmail, formData, user) => {
+    emailjs
+      .send(
+        'default_service',
+        template,
+        {
+          receiverEmail,
+          formData,
+        },
+        user
+      )
+      .then((res) => {
+        console.log('email sent');
+        // navigate('/success');
+      })
+      // Handle errors here however you like
+      .catch((err) => console.error('Failed to send feedback. Error: ', err));
+  };
 
   const formChange = (event) => {
     // event.stopPropagation();
@@ -74,7 +71,7 @@ const CustomForm = ({
 
   const convertPreviewToUrl = () => {
     convertPrevToUrl();
-  }
+  };
 
   const formColor = (event) => {
     selectColor(event);
@@ -121,7 +118,7 @@ const CustomForm = ({
               name="artFileName"
               onChange={formChange}
             >
-             <option value="noneSelected" className="form-art-option">
+              <option value="noneSelected" className="form-art-option">
                 Choose Template
               </option>
               <option value="template1" className="form-art-option">
@@ -132,9 +129,6 @@ const CustomForm = ({
               </option>
               <option value="template3" className="form-art-option">
                 Template 3
-              </option>
-              <option value="template4" className="form-art-option">
-                Template 4
               </option>
             </select>
           </div>
@@ -152,9 +146,10 @@ const CustomForm = ({
             name="messageFont"
             onChange={formChange}
           >
-            <option value="March">March</option>
-            <option value="Bon-Vivant">Bon Vivant</option>
-            <option value="Rodetta">Rodetta</option>
+            <option value="Meddon">Meddon</option>
+            <option value="Modak">Modak</option>
+            <option value="Monoton">Monoton</option>
+            <option value="Yeseva-One">Yeseva One</option>
           </select>
           <select
             className="form-text-size-selection"

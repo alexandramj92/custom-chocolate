@@ -1,5 +1,5 @@
 import React from 'react';
-import NavLogo from '../assets/logos/transparent-logo.png';
+import NavLogo from '../assets/logos/sorbet_logo.png';
 import './Navbar.scss';
 
 const Navbar = () => {
