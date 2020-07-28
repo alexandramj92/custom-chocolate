@@ -2,21 +2,13 @@ import React, { useState, useEffect } from 'react';
 import PreviewBox from '../PreviewBox/PreviewBox';
 import FormContainer from '../FormContainer/FormContainer';
 import domtoimage from 'dom-to-image';
-
-
 import './ChocolateBarCustomizer.scss';
-
 import MarchLogo from '../../assets/logos/march_logo.png';
 import SorbetLogo from '../../assets/logos/sorbet_logo.png';
-import patternFour from '../../assets/wrapperImages/patternFour.jpg';
 import patternOne from '../../assets/wrapperImages/patternOne.jpg';
-import patternTwo from '../../assets/wrapperImages/patternTwo.png';
+import patternTwo from '../../assets/wrapperImages/patternTwo.jpg';
 import patternThree from '../../assets/wrapperImages/patternThree.jpg';
-
-
-
 import ImageUpload from '../../components/ImageUpload/ImageUpload';
-
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Images from '../../components/Images/Images';
 import ImageUploadButton from '../../components/UI/ImageUploadButton/ImageUploadButton';
@@ -32,7 +24,6 @@ const ChocolateBarCustomizer = () => {
   const [previewImages, setPreviewImages] = useState([]);
   const [selectionMade, setSelectionMade] = useState(false);
 
-
   const [formData, setFormData] = useState({
     logo: '',
     artFileName: 'Template1',
@@ -41,7 +32,7 @@ const ChocolateBarCustomizer = () => {
     messageSize: '14px',
     messageColor: '#0C527D',
     previewUrl: '',
-    uploadedImgUrl: ''
+    uploadedImgUrl: '',
   });
 
   const [isComplete, setIsComplete] = useState(false);
@@ -62,21 +53,17 @@ const ChocolateBarCustomizer = () => {
     }
   };
 
-
   const setDesign = (eventValue) => {
     setSelectionMade(true);
     setUploaded(false);
     if (eventValue === 'noneSelected') {
       setWrapperDesign();
-    }
-     else if (eventValue === 'template1') {
+    } else if (eventValue === 'template1') {
       setWrapperDesign(patternOne);
     } else if (eventValue === 'template2') {
       setWrapperDesign(patternTwo);
     } else if (eventValue === 'template3') {
       setWrapperDesign(patternThree);
-    } else if (eventValue === 'template4') {
-      setWrapperDesign(patternFour);
     }
   };
 
@@ -101,36 +88,31 @@ const ChocolateBarCustomizer = () => {
         setSelectionMade(true);
         setImages(images);
         const url = images[0].url;
-        setFormData({...formData, uploadedImgUrl: url, artFileName: '' });
+        setFormData({ ...formData, uploadedImgUrl: url, artFileName: '' });
       });
   };
 
   const convertPreviewToImage = () => {
-    domtoimage.toBlob(document.getElementById('divHtml2Canvas'))
-    .then(function (blob) {
-      const prevData = new FormData();
-      prevData.append("prevData", blob)
+    domtoimage
+      .toBlob(document.getElementById('divHtml2Canvas'))
+      .then(function (blob) {
+        const prevData = new FormData();
+        prevData.append('prevData', blob);
 
-    
-      console.log(prevData);
+        console.log(prevData);
 
-
-      fetch(`${API_URL}/image-upload`, {
-        method: 'POST',
-        body: prevData,
-      })
-     
-        .then((res) => res.json())
-        .then((prevImages) => {
-          console.log(prevImages);
-          const url = prevImages[0].url;
-          setFormData({...formData, previewUrl:url});
-        });
-       
-    });
-    
-  }
-
+        fetch(`${API_URL}/image-upload`, {
+          method: 'POST',
+          body: prevData,
+        })
+          .then((res) => res.json())
+          .then((prevImages) => {
+            console.log(prevImages);
+            const url = prevImages[0].url;
+            setFormData({ ...formData, previewUrl: url });
+          });
+      });
+  };
 
   const content = () => {
     switch (true) {
@@ -141,13 +123,16 @@ const ChocolateBarCustomizer = () => {
     }
   };
 
-
   const handleChange = (event) => {
     if (event) {
       setFormData({ ...formData, [event.target.name]: event.target.value });
-      if (event.target.name === "artFileName") {
+      if (event.target.name === 'artFileName') {
         setDesign(event.target.value);
-        setFormData({ ...formData, [event.target.name]: event.target.value, uploadedImgUrl: '' });
+        setFormData({
+          ...formData,
+          [event.target.name]: event.target.value,
+          uploadedImgUrl: '',
+        });
       }
       console.log(event.target.value);
     } else {
@@ -177,7 +162,6 @@ const ChocolateBarCustomizer = () => {
 
   return (
     <div className="chocolatebarcustomizer">
-
       <div className="grid-container">
         <div className="grid-item">
           <FormContainer
@@ -185,7 +169,7 @@ const ChocolateBarCustomizer = () => {
             handleChange={(e) => handleChange(e)}
             selectColor={(e) => selectColor(e)}
             clearFormData={() => clearFormData()}
-            convertPrevToUrl={()=> convertPreviewToImage()}
+            convertPrevToUrl={() => convertPreviewToImage()}
             formData={formData}
             setFormData={setFormData}
             isComplete={isComplete}
