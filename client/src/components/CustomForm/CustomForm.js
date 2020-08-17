@@ -18,6 +18,8 @@ const CustomForm = ({
   setFormData,
   isComplete,
   setIsComplete,
+  submittingDes,
+  setSubmittingDes
 }) => {
   const formSubmit = (event) => {
     event.preventDefault();
@@ -25,17 +27,18 @@ const CustomForm = ({
       (formData.artFileName !== '' || formData.uploadedImgUrl !== '') &&
       formData.message !== ''
     ) {
-      const {
-        REACT_APP_EMAILJS_RECEIVER: receiverEmail,
-        REACT_APP_EMAILJS_TEMPLATEID: template,
-        REACT_APP_EMAILJS_USERID: user,
-      } = process.env;
+      // const {
+      //   REACT_APP_EMAILJS_RECEIVER: receiverEmail,
+      //   REACT_APP_EMAILJS_TEMPLATEID: template,
+      //   REACT_APP_EMAILJS_USERID: user,
+      // } = process.env;
 
       setIsComplete(true);
+      setSubmittingDes(true);
 
       convertPreviewToUrl();
 
-      sendForm(template, receiverEmail, formData, user);
+      // sendForm(template, receiverEmail, formData, user);
 
       console.log('Success');
     } else {
