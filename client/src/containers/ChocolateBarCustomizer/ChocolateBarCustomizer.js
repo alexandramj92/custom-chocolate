@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PreviewBox from '../PreviewBox/PreviewBox';
 import FormContainer from '../FormContainer/FormContainer';
+import ContactForm from '../../components/ContactForm/ContactForm';
 import domtoimage from 'dom-to-image';
 import './ChocolateBarCustomizer.scss';
 import MarchLogo from '../../assets/logos/march_logo.png';
@@ -10,6 +11,7 @@ import patternTwo from '../../assets/wrapperImages/patternTwo.jpg';
 import patternThree from '../../assets/wrapperImages/patternThree.jpg';
 import ImageUpload from '../../components/ImageUpload/ImageUpload';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import Modal from '../../components/UI/Modal/Modal';
 import Images from '../../components/Images/Images';
 import ImageUploadButton from '../../components/UI/ImageUploadButton/ImageUploadButton';
 
@@ -23,6 +25,7 @@ const ChocolateBarCustomizer = () => {
   const [uploaded, setUploaded] = useState(false);
   const [previewImages, setPreviewImages] = useState([]);
   const [selectionMade, setSelectionMade] = useState(false);
+  const [submittingDes, setSubmittingDes] = useState(false);
 
   const [formData, setFormData] = useState({
     logo: '',
@@ -33,6 +36,9 @@ const ChocolateBarCustomizer = () => {
     messageColor: '#0C527D',
     previewUrl: '',
     uploadedImgUrl: '',
+    firstName: '',
+    lastName: '',
+    email: ''
   });
 
   const [isComplete, setIsComplete] = useState(false);
@@ -52,6 +58,10 @@ const ChocolateBarCustomizer = () => {
       setLogoSelection();
     }
   };
+
+  const submitCancelHandler = () => {
+    setSubmittingDes(false);
+  }
 
   const setDesign = (eventValue) => {
     setSelectionMade(true);
@@ -162,6 +172,14 @@ const ChocolateBarCustomizer = () => {
 
   return (
     <div className="chocolatebarcustomizer">
+     <Modal show={submittingDes} modalClosed={submitCancelHandler}>
+          <ContactForm
+            formData = {formData}
+            setFormData = {setFormData}
+            setSubmittingDes = {setSubmittingDes}
+           />
+      </Modal>
+
       <div className="grid-container">
         <div className="grid-item">
           <FormContainer
@@ -174,6 +192,8 @@ const ChocolateBarCustomizer = () => {
             setFormData={setFormData}
             isComplete={isComplete}
             setIsComplete={setIsComplete}
+            submittingDes={submittingDes}
+            setSubmittingDes={setSubmittingDes}
           />
         </div>
         <div className="grid-item" id="divHtml2Canvas">

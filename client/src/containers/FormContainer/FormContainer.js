@@ -12,6 +12,8 @@ const FormContainer = ({
   setFormData,
   isComplete,
   setIsComplete,
+  submittingDes,
+  setSubmittingDes
 }) => {
   return (
     <div className="form-container">
@@ -25,6 +27,8 @@ const FormContainer = ({
         setFormData={setFormData}
         isComplete={isComplete}
         setIsComplete={setIsComplete}
+        submittingDes={submittingDes}
+        setSubmittingDes={setSubmittingDes}
       />
     </div>
   );
